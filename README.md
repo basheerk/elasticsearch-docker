@@ -23,3 +23,31 @@ A full build and test requires:
 Acceptance tests for the image are located in the test directory, and can be invoked with `make test`.
 
 This image is built on [CentOS 7](https://github.com/CentOS/sig-cloud-instance-images/blob/CentOS-7/docker/Dockerfile).
+
+## How to build for ppc64le arch:
+Before building this for `ppc64le`, the first thing we need to do is build
+elasticsearch. To do that, pull elasticsearch:
+```
+https://github.ibm.com/powercloud/elasticsearch
+```
+Checkout to ppc64le_changes:
+```
+git checkout ppc64le_changes
+```
+Build elasticsearch:
+```
+gradle assemble  # requires version >= 4
+```
+This creates the required tar.gz file for elasticsearch under `distribution/tar/build/distributions/elasticsearch-5.5.1-SNAPSHOT.tar.gz`.
+
+Copy this tar.gz to elasticsearch-docker:
+```
+cp /path/to/elasticsearch-5.5.1-SNAPSHOT.tar.gz elasticsearch-docker/build/elasticsearch/elasticsearch-5.5.1.tar.gz
+```
+That's it, now go to elasticsearch-docker and do:
+
+$ GIT_BRANCH=<BRANCH> make build
+
+e.g:
+
+`$ GIT_BRANCH=5.5 make build`
