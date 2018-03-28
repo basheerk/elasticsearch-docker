@@ -5,6 +5,8 @@ ifndef ELASTIC_VERSION
 ELASTIC_VERSION := $(shell ./bin/elastic-version)
 endif
 
+ARCH ?= $(shell uname -m)
+
 ifdef STAGING_BUILD_NUM
 VERSION_TAG := $(ELASTIC_VERSION)-$(STAGING_BUILD_NUM)
 else
@@ -86,6 +88,7 @@ dockerfile: venv templates/Dockerfile.j2
 	  -D elastic_version='$(ELASTIC_VERSION)' \
 	  -D staging_build_num='$(STAGING_BUILD_NUM)' \
 	  -D release_manager='$(RELEASE_MANAGER)' \
+	  -D ARCH='$(ARCH)' \
 	  templates/Dockerfile.j2 > build/elasticsearch/Dockerfile
 
 # Generate the docker-compose.yml from a Jinja2 template.
