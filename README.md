@@ -38,11 +38,11 @@ Build elasticsearch:
 ```
 gradle assemble  # requires version >= 4
 ```
-This creates the required tar.gz file for elasticsearch under `distribution/tar/build/distributions/elasticsearch-5.5.1-SNAPSHOT.tar.gz`.
+This creates the required tar.gz file for elasticsearch under `distribution/tar/build/distributions/elasticsearch-5.6.8-SNAPSHOT.tar.gz`.
 
 Copy this tar.gz to elasticsearch-docker:
 ```
-cp /path/to/elasticsearch-5.5.1-SNAPSHOT.tar.gz elasticsearch-docker/build/elasticsearch/elasticsearch-5.5.1.tar.gz
+cp /path/to/elasticsearch-5.6.8-SNAPSHOT.tar.gz elasticsearch-docker/build/elasticsearch/elasticsearch-5.6.8.tar.gz
 ```
 That's it, now go to elasticsearch-docker and do:
 
@@ -50,4 +50,4 @@ $ GIT_BRANCH=<BRANCH> make build
 
 e.g:
 
-`$ GIT_BRANCH=5.5 make build`
+`$ GIT_BRANCH=5.6 make build`
